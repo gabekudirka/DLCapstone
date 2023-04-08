@@ -149,7 +149,7 @@ if __name__ == '__main__':
             dc_road_segments.append(segment_obj)
 
     BBOX_DIM = 60
-    OVERLAP = 3
+    OVERLAP = 6
     MAX_DIST = 30
 
     #Collect evenly spaced coordinates along the road network for images
