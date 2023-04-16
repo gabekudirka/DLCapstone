@@ -4,7 +4,7 @@ import pandas as pd
 import time
 import threading
 
-def request_imgs(df, dir_path, resolution=440):
+def request_imgs(df, dir_path, resolution=600):
     for i, row in df.iterrows():
         # xmin, ymin, xmax, ymax, filename, _, _ = row
         URL = f'https://imagery.dcgis.dc.gov/dcgis/rest/services/Ortho/Ortho_2021/ImageServer/exportImage?bbox={row["xmin"]}%2C{row["ymin"]}%2C{row["xmax"]}%2C{row["ymax"]}.0&bboxSR=&size={resolution}%2C{resolution}&imageSR=&time=&format=png&pixelType=U8&noData=&noDataInterpretation=esriNoDataMatchAny&interpolation=+RSP_BilinearInterpolation&compression=&compressionQuality=&bandIds=&sliceId=&mosaicRule=&renderingRule=&adjustAspectRatio=true&validateExtent=false&lercVersion=1&compressionTolerance=&f=image'
@@ -27,8 +27,8 @@ def multi_threaded_requests(df, dir_path, num_threads):
         thread.join()
 
 if __name__ == '__main__':
-    df_coords = pd.read_csv('./data/img_metadata/399697_135518_401430_136935.csv')
-    dir_path = './data/aerial_images/399697_135518_401430_136935/'
+    df_coords = pd.read_csv('./data/img_metadata/annotated_region.csv')
+    dir_path = './data/aerial_images/annotated_region/'
     multi_threaded_requests(df_coords, dir_path, 6)
 
     
